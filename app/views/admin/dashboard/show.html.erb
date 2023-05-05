@@ -1,2 +1,14 @@
-<h1>Admin::Dashboard#show</h1>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<h1>Jungle Dashboard</h1>
+
+<div class ='d-flex flex-row'>
+
+<div class="card stat-card w-50" >
+    <h4><%=@products.count%> </h4>
+    Products
+</div>
+<div class="card stat-card w-50">
+    <h4><%=@categories.count%></h4>
+    Categories  
+</div>
+
+</div>
