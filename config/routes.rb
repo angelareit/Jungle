@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
 
-  #get 'about/index'
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+  
   root to: 'products#index'
-
+  
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
   resources :about, only: [:index]
@@ -18,7 +23,6 @@ Rails.application.routes.draw do
     root to: 'dashboard#show'
     resources :products, except: [:edit, :update, :show]
     resources :categories, only: [:index, :new, :create]
-
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

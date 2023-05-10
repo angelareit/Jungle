@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_26_062916) do
+ActiveRecord::Schema.define(version: 2023_05_10_004526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,28 @@ ActiveRecord::Schema.define(version: 2021_06_26_062916) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
+  create_table "tasks", primary_key: "task_id", id: :serial, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "cat_id", null: false
+    t.integer "priority", default: 0
+    t.string "title", limit: 255, null: false
+    t.datetime "task_due"
+    t.boolean "is_completed", default: false
+    t.datetime "created_date"
+    t.datetime "completed_date"
+    t.check_constraint "(priority >= 0) AND (priority <= 5)", name: "tasks_priority_check"
+  end
+
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+    t.string "password", limit: 255
+    t.string "email", limit: 255
+    t.string "password_digest"
+    t.string "string"
+  end
+
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
   add_foreign_key "products", "categories"
+  add_foreign_key "tasks", "users", name: "tasks_user_id_fkey"
 end
