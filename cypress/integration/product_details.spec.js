@@ -1,4 +1,4 @@
-describe('Jungle app: product feature', () => {
+describe('Jungle app: product details page', () => {
   beforeEach(() => {
     // Cypress starts out with a blank slate for each test
     // so we must tell it to visit our website with the `cy.visit()` command.
@@ -10,18 +10,11 @@ describe('Jungle app: product feature', () => {
   it('goes to a product page', () => {
     cy.get(".products article").should("be.visible");
 
-   cy.get(':nth-child(1) > a > img')
+    cy.get(':nth-child(1) > a > img')
     .click();
 
     cy.url().should('include', '/products/12');
 
   })
 
- /*  it("There is products on the page", () => {
-    cy.get(".products article").should("be.visible");
-  });
-
-  it("There is 2 products on the page", () => {
-    cy.get(".products article").should("have.length", 2);
-  }); */
 })
